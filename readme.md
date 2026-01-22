@@ -1,5 +1,8 @@
 # Libgdx triangle batch
 
+!!! In progress !!!
+
+
 Experiment on
 
   - how to build some LibGDX triangle output system.
