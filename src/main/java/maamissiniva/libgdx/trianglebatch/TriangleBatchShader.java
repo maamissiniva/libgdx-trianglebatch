@@ -86,6 +86,7 @@ public class TriangleBatchShader {
             , "}"
             , ""
             , "const float spread    = 4.0;" // distance field spread
+            , "const float dfk       = 2.0;" // reference : 4.0
             , ""
             , "void main()"
             , "{"
@@ -102,7 +103,7 @@ public class TriangleBatchShader {
             , "  } else if (v_ctrl_draw == 2) {"
             , "    int   v_ctrl_tex   = int(v_ctrl.r * 255.0);"
             , "    float v_ctrl_scale = (v_ctrl.g * 255.0 + 1.0) / 16.0;"
-            , "    float smoothing    = 1.0 / (4.0 * spread * v_ctrl_scale);"
+            , "    float smoothing    = 1.0 / (dfk * spread * v_ctrl_scale);"
             , "    float distance     = getTexColor(v_ctrl_tex, v_texCoords).a;"
             , "    float alpha        = smoothstep(0.5 - smoothing, 0.5 + smoothing, distance);"
             , "    gl_FragColor       = vec4(v_color.rgb, v_color.a * alpha);"
@@ -111,8 +112,7 @@ public class TriangleBatchShader {
             , "    int v_ctrl_tex      = int(v_ctrl.r * 255.0);"
             , "    float distance      = getTexColor(v_ctrl_tex, v_texCoords).a;"
             , "    float v_ctrl_scale  = (v_ctrl.g * 255.0 + 1.0)/ 16.0;"
-            , "    v_ctrl_scale  = 1.0;"
-            , "    float smoothing     = 1.0 / (4.0 * spread * v_ctrl_scale);"
+            , "    float smoothing     = 1.0 / (dfk * spread * v_ctrl_scale);"
             , "    float outline_width = v_ctrl.b / 5.0;"
             , "    float degde = 0.5 - abs(distance - 0.5);" 
             , "    float alpha = smoothstep(0.5 - outline_width - smoothing, 0.5 - outline_width + smoothing, degde);"
@@ -120,7 +120,7 @@ public class TriangleBatchShader {
             // -- draw v controlled distance AA
             , "  } else if (v_ctrl_draw == 4) {"
             , "    float v_ctrl_scale = 1.0;"
-            , "    float smoothing    = 1.0 / (4.0 * spread * v_ctrl_scale);"
+            , "    float smoothing    = 1.0 / (dfk * spread * v_ctrl_scale);"
             , "    float distance     = v_texCoords.y;"
             , "    float alpha        = smoothstep(0.5 - smoothing, 0.5 + smoothing, distance);"
             , "    gl_FragColor = vec4(v_color.rgb, v_color.a * alpha);"
