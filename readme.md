@@ -12,6 +12,10 @@ The shader strategy may be a bad idea as
 
   - it uses conditionals which may be pretty bad for GPUs
   - it uses more GPU bandwidth than LibGDX SpritBatch
+  
+## Dependency
+
+[maamissiniva-libgdx-trianglebatch](https://central.sonatype.com/artifact/io.github.maamissiniva/maamissiniva-libgdx-trianglebatch)
 
 ## Shader algorithms
 
